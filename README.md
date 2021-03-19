@@ -1,6 +1,6 @@
 # Password Reset 
 
-This repository contains a ready to use login,register and password reset in php using PHPMailer
+This repository contains a ready to use login,register and password reset in php using PHPMailer but you can involve on it by using prepared statements to prevent SQL injections.
 
 ### Database
 use the below code to create the database for your project,but you can call it any name of your choice,but you have to change to your preferred name under `db_connection.php` file on the project root
