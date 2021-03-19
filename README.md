@@ -3,7 +3,7 @@
 This repository contains a ready to use login,register and password reset in php using PHPMailer but you can involve on it by using prepared statements to prevent SQL injections.
 
 ### Database
-use the below code to create the database for your project,but you can call it any name of your choice,but you have to change to your preferred name under `db_connection.php` file on the project root
+use the below code to create the database for your project,but you can call it any name of your choice,but you have to change to your preferred name under `db_connection.php` file on the project root.
 
 ```CREATE DATABASE oop_db```
 
@@ -25,7 +25,7 @@ ALTER TABLE `users`
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 ```
-
+The table code can also be copied from a file named `users.sql` in the project
 
 ### PHPMailer Configuration
 For this project you need PHPMailer,which is a code library to send emails safely and easily via PHP code from a web server. Sending emails directly by PHP code requires a high-level familiarity to SMTP protocol standards and related issues and vulnerabilities about Email injection for spamming. [Wikipedia](https://en.wikipedia.org/wiki/PHPMailer)
