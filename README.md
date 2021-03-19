@@ -1,6 +1,3 @@
-# password_reset
-This repository contains a ready to use login,register and password reset in php using PHPMailer
-
 # Password Reset 
 
 This repository contains a ready to use login,register and password reset in php using PHPMailer
@@ -84,6 +81,7 @@ $reset = 'http://localhost/emobilis_php/login_register/reset-password.php';
 If you are testing it locally, you must go to `gmail->account-> security -> (scroll down to less secure app access and turn it to on)` This enable sending and receiving your emails but don't try that on production.
 
 ## For any enquires
-Just whatsapp/sms/call me on +254756949393
+Just whatsapp/sms/call me on `+254756949393`
 Enjoy playing around with the codes to meet your requirements
 
+Email `devsteveryan@gmail.com`
