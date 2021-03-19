@@ -55,8 +55,7 @@ if(isset($_POST['password-reset-token']) && $_POST['user_email'])
 
 //change the link based on your project directory
  $link = "
-    <a href='http://localhost/emobilis_php/
-login_register/reset-password.php?key=".$emailId."
+    <a href='http://localhost/password_reset/reset-password.php?key=".$emailId."
 &token=".$token."'> Click To Reset password</a>";
 
 ...omitted lines of code
@@ -70,8 +69,8 @@ Secondly, under `update-forget-password.php` file, edit following lines based on
 ```
 ...omitted lines of code
 
-$loginpage = 'http://localhost/emobilis_php/login_register/index.php';
-$reset = 'http://localhost/emobilis_php/login_register/reset-password.php';
+$loginpage = 'http://localhost/password_reset/index.php';
+$reset = 'http://localhost/password_reset/reset-password.php';
 
 ...omitted lines of code
 ```
