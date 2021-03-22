@@ -25,6 +25,25 @@ ALTER TABLE `users`
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 ```
+
+Below is the event table `event.sql`
+
+```
+CREATE TABLE `task` (
+  `task_id` int(11) NOT NULL,
+  `name` varchar(255)  NOT NULL,
+  `venue` varchar(255)  NOT NULL,
+  `event_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `task`
+  ADD PRIMARY KEY (`task_id`);
+
+ALTER TABLE `task`
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT;
+```
+
+
 The table code can also be copied from a file named `users.sql` in the project
 
 ### PHPMailer Configuration
