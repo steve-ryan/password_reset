@@ -93,7 +93,8 @@ $reset = 'http://localhost/password_reset/reset-password.php';
 
 ...omitted lines of code
 ```
-
+### React version of the same
+Follow this link ![React.js version](https://github.com/steve-ryan/Event-Manager)
 
 ## NB
 If you are testing it locally, you must go to `gmail->account-> security -> (scroll down to less secure app access and turn it to on)` This enable sending and receiving your emails but don't try that on production.
