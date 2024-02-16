@@ -6,12 +6,14 @@ if(isset($_POST['password-reset-token']) && $_POST['user_email'])
 {
    require ("./db_connection.php");
    
-     
     $emailId = $_POST['user_email'];
- 
-    $result = mysqli_query($db_connection ,"SELECT * FROM users WHERE user_email='" . $emailId . "'");
- 
-    $row= mysqli_fetch_array($result);
+
+    $stmt = $db_connection->prepare("SELECT * FROM users WHERE user_email= ?");
+    $stmt->bind_param("s", $emailId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $row = $result->fetch_array(MYSQLI_ASSOC);
  
   if($row)
   {
@@ -24,8 +26,9 @@ if(isset($_POST['password-reset-token']) && $_POST['user_email'])
  
     $expDate = date("Y-m-d H:i:s",$expFormat);
  
-    $update = mysqli_query($db_connection,"UPDATE users set reset_link_token='" . $token . "' ,
-    exp_date='" . $expDate . "' WHERE user_email='" . $emailId . "'");
+    $stmt = $db_connection->prepare("UPDATE users set reset_link_token=?, exp_date=? WHERE user_email=?");
+    $stmt->bind_param("sss", $token, $expDate, $emailId);
+    $stmt->execute();
  
     $link = "
     <a href='http://localhost/password_reset/reset-password.php?key=".$emailId."&token=".$token."'>
@@ -44,18 +47,18 @@ if(isset($_POST['password-reset-token']) && $_POST['user_email'])
     // enable SMTP authentication
     $mail->SMTPAuth = true;                  
     // GMAIL username
-    $mail->Username = "testd@gmail.com"; //set your gmail here
+    $mail->Username = "test@gmail.com"; //set gmail here
     // GMAIL password
-    $mail->Password = "generated_password_here"; //set the generated password (16 digits)
+    $mail->Password = "generated_password_here"; //set generated passwoord (16characters)
     $mail->SMTPSecure = "ssl";  
     // sets GMAIL as the SMTP server
     $mail->Host = "smtp.gmail.com";
     // set the SMTP port for the GMAIL server
     $mail->Port = "465";
-    $mail->From='test@gmail.com'; //replace this with what you inserted on line 47
-    $mail->FromName='Steve';  //replace this with name you want to appear on receiver side as sender name
+    $mail->From = "test@gmail.com"; //same email here
+    $mail->FromName = 'Steve';
     $mail->SMTPDebug = 0;
-    $mail->AddAddress($emailId, $row['firstname']); //on this we set receiver name and the second part is optional but that gets receiver name
+    $mail->AddAddress($emailId, $row['firstname']);
     $mail->Subject  =  'Reset Password';
     $mail->IsHTML(true);
     $mail->Body    = 'Click On This Link to Reset Password '.$link.'';
@@ -72,4 +75,3 @@ if(isset($_POST['password-reset-token']) && $_POST['user_email'])
     
   }
 }
-?>

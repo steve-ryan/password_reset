@@ -1,37 +1,37 @@
 <?php
 session_start();
 require 'db_connection.php';
-// CHECK USER IF LOGGED IN
-if(isset($_SESSION['user_email']) && !empty($_SESSION['user_email'])){
 
-$user_email = $_SESSION['user_email'];
-$get_user_data = mysqli_query($db_connection, "SELECT * FROM `users` WHERE user_email = '$user_email'");
-$userData =  mysqli_fetch_assoc($get_user_data);
-
-}else{
-header('Location: logout.php');
-exit;
+// Check if user is logged in
+if(!isset($_SESSION['user_email']) || empty($_SESSION['user_email'])){
+    header('Location: logout.php');
+    exit;
 }
+
+// Retrieve user data from the database
+$user_email = $_SESSION['user_email'];
+$stmt = $db_connection->prepare("SELECT * FROM `users` WHERE user_email = ?");
+$stmt->bind_param("s", $user_email);
+$stmt->execute();
+$result = $stmt->get_result();
+$userData = $result->fetch_assoc();
+$stmt->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/fontawesome.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/regular.css" rel="stylesheet">
     <title>Home</title>
 </head>
-
 <body>
     <?php require_once 'server.php'; ?>
 
@@ -70,7 +70,7 @@ exit;
                             if ($update == true) {
                                 echo '<button type="submit" class="btn btn-success form-control" name="update">Update</button>';
                             } else {
-                            echo '<button type="submit" class="btn btn-success form-control" name="add">Add</button>';
+                                echo '<button type="submit" class="btn btn-success form-control" name="add">Add</button>';
                             }
                             ?>
                         </div>
@@ -92,13 +92,11 @@ exit;
                 </thead>
                 <tbody>
                     <?php
-                get_all_data($db_connection);
-                ?>
+                    get_all_data($db_connection);
+                    ?>
                 </tbody>
             </table>
         </div>
     </div>
-
 </body>
-
 </html>
