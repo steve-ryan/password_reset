@@ -46,7 +46,7 @@ if(isset($_POST['password-reset-token']) && $_POST['user_email'])
     // GMAIL username
     $mail->Username = "testd@gmail.com"; //set your gmail here
     // GMAIL password
-    $mail->Password = "Gmail_password_here"; //set the password
+    $mail->Password = "generated_password_here"; //set the generated password (16 digits)
     $mail->SMTPSecure = "ssl";  
     // sets GMAIL as the SMTP server
     $mail->Host = "smtp.gmail.com";
